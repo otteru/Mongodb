@@ -3,6 +3,7 @@ const path = require('path');
 const express = require('express');
 
 const blogRoutes = require('./routes/blog');
+const db = require("./data/database");// db 요청
 
 const app = express();
 
@@ -22,4 +23,8 @@ app.use(function (error, req, res, next) {
   res.status(500).render('500');
 });
 
-app.listen(3000);
+db.connectToDatabase().then(function () {
+	console.log("hello");
+	app.listen(3000);
+});
+
